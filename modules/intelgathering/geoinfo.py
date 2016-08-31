@@ -23,7 +23,7 @@ class IntelGather:
 
         for path, incoming_ip_obj in all_ips.iteritems():
 
-            if incoming_ip_obj[0].ip_country == "" and incoming_ip_obj[0].ip_city == "" and incoming_ip_obj[0].ip_isp == "" and incoming_ip_obj[0].ip_latitude == "":
+            if incoming_ip_obj[0].ip_address != "" and incoming_ip_obj[0].ip_country == "":
 
                 # Make request for information about IPs
                 print "Getting info on... " + incoming_ip_obj[0].ip_address
@@ -63,9 +63,14 @@ class IntelGather:
                         if decoded_json['org'].encode('utf-8') is not '':
                             incoming_ip_obj[0].ip_organization = decoded_json['org'].encode('utf-8')
 
-                    # Sleep is here to make sure we don't go over API limits
-                    time.sleep(.25)
                 except urllib2.URLError:
                     print helpers.color("[!] Cannot receive IP Geo Information from source!", warning=True)
                     print helpers.color("[!] Moving to the next IP address...", warning=True)
+
+                except (IOError, httplib.HTTPException):
+                    print helpers.color("[!] Cannot receive IP Geo Information from source!", warning=True)
+                    print helpers.color("[!] Moving to the next IP address...", warning=True)
+
+                # Sleep is here to make sure we don't go over API limits
+                time.sleep(.5)
         return

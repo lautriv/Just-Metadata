@@ -27,12 +27,15 @@ case ${osinfo} in
   Kali)
     echo '[*] Installing Kali Dependencies'
     apt-get install -y python-pip
+    easy_install -U pip
     pip install ipwhois
     pip install ipwhois --upgrade
     pip install requests
     pip install requests --upgrade
     pip install shodan
     pip install shodan --upgrade
+    pip install netaddr
+    pip install netaddr --upgrade
 	# Finish Message
 	echo '[*] Setup script completed successfully, enjoy Just-Metadata! :)'
   ;;
@@ -47,25 +50,32 @@ case ${osinfo} in
     pip install requests --upgrade
     pip install shodan
     pip install shodan --upgrade
+    pip install netaddr
+    pip install netaddr --upgrade
     echo
 	# Finish Message
-	echo '[*] Setup script completed successfully, enjoy Just-Metadata! :)'
+	echo '[*] Setup script completed successfully on Debian, enjoy Just-Metadata! :)'
   ;;
   # Ubuntu (tested in 13.10) Dependency Installation
   Ubuntu)
     echo '[*] Installing Ubuntu Dependencies'
     apt-get install -y python-pip
     easy_install -U pip
+    papt-get install python-colorama
     pip install ipwhois
     pip install ipwhois --upgrade
     pip install requests
     pip install requests --upgrade
     pip install shodan
     pip install shodan --upgrade
+    pip install netaddr
+    pip install netaddr --upgrade
     echo
     echo
 	# Finish Message
-	echo '[*] Setup script completed successfully, enjoy Just-Metadata! :)'
+	echo '[*] Setup script completed successfully on Ubuntu, enjoy Just-Metadata! :)'
+	cat /etc/issue
+	uname -a
   ;;
   *)
   	echo '[!] Error:  Unable to recognize operating system.'
